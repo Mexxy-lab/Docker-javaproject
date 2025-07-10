@@ -10,8 +10,8 @@ services:
     container_name: vprodb
     ports:
       - "3306:3306"
-    # volumes:
-    #   - vprodb_data:/var/lib/mysql
+    volumes:
+      - vprodb_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=vprodbpass
       - MYSQL_DATABASE="accounts"
@@ -54,6 +54,6 @@ services:
     depends_on:
       - vproapp
 
-# volumes:
-#   vprodb_data:  {}
+volumes:
+  vprodb_data:  {}
 #   # vproapp_data: {}
