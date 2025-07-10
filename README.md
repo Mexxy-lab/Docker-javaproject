@@ -12,6 +12,7 @@
     - You can also install docker desktop if you want 
     - Create a dockerhub account for hosting your built images 
     - You can use a VM or EC instance provisioned in cloud for running the containers. Make sure to install docker engine for Ubutu
+    - In this project, a VM was provisioned using a Vagrantfile.
     - https://docs.docker.com/engine/install/ubuntu/
 
 ## Project Architecture 
