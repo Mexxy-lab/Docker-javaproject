@@ -3,7 +3,7 @@ FROM openjdk:11 AS BUILD_IMAGE
 
 RUN apt update && apt install git maven -y
 RUN git clone https://github.com/Mexxy-lab/Docker-javaproject.git
-RUN cd vprofile-project && mvn install
+RUN cd Docker-javaproject && mvn install
 
 FROM tomcat:9-jre11
 
