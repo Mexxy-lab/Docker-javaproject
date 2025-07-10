@@ -23,42 +23,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       apt-get install -y python3 python3-pip python-is-python3
     SHELL
   end
-
-  # Worker Node 1
-  # config.vm.define "worker-node1" do |node|
-  #   node.vm.hostname = "worker-node1"
-  #   node.vm.network "private_network", ip: "192.168.56.18"
-  #   node.vm.synced_folder ".", "/vagrant", disabled: true
-
-  #   node.vm.provider :virtualbox do |v|
-  #     v.memory = 2048
-  #     v.cpus = 2
-  #   end
-
-  #   node.vm.provision "shell", inline: <<-SHELL
-  #     export DEBIAN_FRONTEND=noninteractive
-  #     apt-get update -y
-  #     apt-get upgrade -yq
-  #     apt-get install -y python3 python3-pip python-is-python3
-  #   SHELL
-  # end
-
-  # # Optional: Add worker-node2 if needed
-  # config.vm.define "worker-node2" do |node|
-  #   node.vm.hostname = "worker-node2"
-  #   node.vm.network "private_network", ip: "192.168.56.19"
-  #   node.vm.synced_folder ".", "/vagrant", disabled: true
-
-  #   node.vm.provider :virtualbox do |v|
-  #     v.memory = 2048
-  #     v.cpus = 2
-  #   end
-
-  #   node.vm.provision "shell", inline: <<-SHELL
-  #     export DEBIAN_FRONTEND=noninteractive
-  #     apt-get update -y
-  #     apt-get upgrade -yq
-  #     apt-get install -y python3 python3-pip python-is-python3
-  #   SHELL
-  # end
 end
