@@ -19,15 +19,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.provision "shell", inline: <<-SHELL
       set -e
       export DEBIAN_FRONTEND=noninteractive
-
       apt-get update -y
       apt-get upgrade -yq
-      apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release software-properties-common
+      apt-get install -y apt-transport-https ca-certificates curl unzip zip software-properties-common lsb-release
       install -m 0755 -d /etc/apt/keyrings
-      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-      chmod a+r /etc/apt/keyrings/docker.gpg
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+        tee /etc/apt/keyrings/docker.asc > /dev/null
+      chmod a+r /etc/apt/keyrings/docker.asc
       echo \
-        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
         $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
         tee /etc/apt/sources.list.d/docker.list > /dev/null
       apt-get update -y
@@ -36,7 +36,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       usermod -aG docker vagrant
       systemctl enable docker
       systemctl start docker
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      ./aws/install
+      rm -rf aws awscliv2.zip
+      echo "Docker version:"
       docker --version
+      echo "AWS CLI version:"
+      aws --version
     SHELL
   end
 end
