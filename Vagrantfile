@@ -31,6 +31,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
       sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+      sudo usermod -aG docker vagrant
+      sudo systemctl enable docker
       sudo docker --version
     SHELL
   end
