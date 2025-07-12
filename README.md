@@ -52,16 +52,27 @@
 <img src="pictures/image.png" alt="alt text" width="300" height="200"/>
 
 ## Now you can push your images to your dockerhub account successfully 
+    
+    - The below command is for a private ECR repository
 
     ```bash
-    docker push imageName:tag
+    aws ecr create-repository --repository-name vprofile-repo --region us-east-1                                    
+    docker build -t imageName:v1 .                                                                                                                  | Used to build imageName:v1
+    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 598189530267.dkr.ecr.us-east-1.amazonaws.com       | Used to auth to ECR
+    docker tag imageName:latest 598189530267.dkr.ecr.us-east-1.amazonaws.com/vprofile-repo:latest                                                   | Tag the image first 
+    docker push 598189530267.dkr.ecr.us-east-1.amazonaws.com/vprofile-repo:latest                                                                   | Used to push image to remote repo. 
     ```
 
+    ```bash
+    aws ecr-public create-repository \
+        --repository-name vprofile-repo \
+        --region us-east-1                                                                                              | Used to create an aws public repository.
+    ```
 ## Troubleshooting steps for any issue use below commands 
 
 - Check container logs for any errors or warning message eg connection refused 
 
-    ```bash
+    ```bash         
     docker logs containerID
     docker logs vproapp
     ```
